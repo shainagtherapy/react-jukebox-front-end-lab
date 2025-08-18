@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import * as trackService from './services/trackService';
 
 import TrackList from './components/TrackList/TrackList';
-import TrackForm from './components/TrackForm/TrackForm';
 import TrackDetail from './components/TrackDetail/TrackDetail';
+import TrackForm from './components/TrackForm/TrackForm';
 
 
 const App = () => {
@@ -35,8 +35,7 @@ const App = () => {
     setIsFormOpen(false);
   }
 
-  const handleFormView = (track) => {
-    if (!track._id) setSelected(null);
+  const handleFormView = () => {
     setIsFormOpen(!isFormOpen);
   }
 
@@ -55,10 +54,10 @@ const App = () => {
     <>
     <h1>JukeBox Hero</h1>
     <TrackList tracks={tracks} 
-    handleSelect={handleSelect} />
-    <TrackForm />
-    <TrackDetail selected={selected} />
-    
+    handleSelect={handleSelect} handleFormView={handleFormView} isFormOpen={isFormOpen} />
+    {isFormOpen ? (
+    <TrackForm /> ) : (
+    <TrackDetail selected={selected} /> )}
     </>
   )
 };
