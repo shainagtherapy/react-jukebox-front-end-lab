@@ -10,8 +10,8 @@ const TrackDetail = (props) => {
 
     return (
         <div>
-            <h2> "{props.selected.title}" </h2>
-            <h2> {props.selected.artist} </h2>
+            <h2> Track Title: "{props.selected.title}" </h2>
+            <h2> Artist: {props.selected.artist} </h2>
         </div>
     );
 };

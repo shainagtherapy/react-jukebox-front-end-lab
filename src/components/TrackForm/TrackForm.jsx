@@ -7,7 +7,7 @@ const TrackForm = (props) => {
     })
 
     const handleChange = (event) => {
-        setFormData({...formData, [event.target.title]: event.target.value});
+        setFormData({...formData, [event.target.name]: event.target.value});
     };
 
     const handleSubmit = (event) => {
@@ -21,7 +21,7 @@ const TrackForm = (props) => {
     
     return (
         <div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label htmlFor="title">Title:</label>
                 <input id="title" name="title" value={formData.title} onChange={handleChange} required />
             

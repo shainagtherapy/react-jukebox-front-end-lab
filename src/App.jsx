@@ -39,12 +39,11 @@ const App = () => {
     setIsFormOpen(!isFormOpen);
   }
 
-  const handleCreate = async (trackData) => {
+  const handleAddTrack = async (formData) => {
     try {
-      const newTrack = await trackService.create(trackData);
+      const newTrack = await trackService.create(formData);
       setTracks([newTrack, ...tracks])
       setIsFormOpen(false);
-
     } catch (err) {
       console.log(err)
     }
@@ -56,7 +55,7 @@ const App = () => {
     <TrackList tracks={tracks} 
     handleSelect={handleSelect} handleFormView={handleFormView} isFormOpen={isFormOpen} />
     {isFormOpen ? (
-    <TrackForm /> ) : (
+    <TrackForm handleAddTrack={handleAddTrack}/> ) : (
     <TrackDetail selected={selected} /> )}
     </>
   )
