@@ -1,10 +1,14 @@
 import { useState } from 'react';
 
 const TrackForm = (props) => {
-    const [formData, setFormData] = useState({
-        title:'',
-        artist:'', 
-    })
+    const initialState = {
+            title:'',
+            artist:'', 
+    };
+
+    const [formData, setFormData] = useState(
+        props.selected ? props.selected : initialState
+    );
 
     const handleChange = (event) => {
         setFormData({...formData, [event.target.name]: event.target.value});
@@ -18,7 +22,7 @@ const TrackForm = (props) => {
             props.handleAddTrack(formData);
         }
     }
-    
+
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -27,10 +31,11 @@ const TrackForm = (props) => {
             
                 <label htmlFor="artist">Artist:</label>
                 <input id="artist" name="artist" value={formData.artist} onChange={handleChange} required />
-            <button type="submit">Add New Track</button>
+            <button type="submit"> {props.selected ? 'Update Pet' : 'Add New Pet'} </button>
             </form>
         </div>
     );
 };
+
 
 export default TrackForm;

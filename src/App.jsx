@@ -36,6 +36,7 @@ const App = () => {
   }
 
   const handleFormView = () => {
+    if (!tracks._id) setSelected(null);
     setIsFormOpen(!isFormOpen);
   }
 
@@ -55,8 +56,8 @@ const App = () => {
     <TrackList tracks={tracks} 
     handleSelect={handleSelect} handleFormView={handleFormView} isFormOpen={isFormOpen} />
     {isFormOpen ? (
-    <TrackForm handleAddTrack={handleAddTrack}/> ) : (
-    <TrackDetail selected={selected} /> )}
+    <TrackForm handleAddTrack={handleAddTrack} selected={selected}/> ) : (
+    <TrackDetail selected={selected} handleFormView={handleFormView} /> )}
     </>
   )
 };
