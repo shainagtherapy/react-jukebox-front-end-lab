@@ -18,6 +18,7 @@ const create = async (formData) => {
             },
             body: JSON.stringify(formData),
         });
+        
         return res.json();
     } catch (err) {
         console.log(err);

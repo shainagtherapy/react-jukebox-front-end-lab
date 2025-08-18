@@ -3,11 +3,13 @@ import * as trackService from './services/trackService';
 
 import TrackList from './components/TrackList/TrackList';
 import TrackForm from './components/TrackForm/TrackForm';
+import TrackDetail from './components/TrackDetail/TrackDetail';
 
 
 const App = () => {
   const [tracks, setTracks] = useState([]);
-  const [showForm, setShowForm] = useState(false);
+  const [selected, setSelected] = useState(null);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   useEffect(() => {
     const getTracks = async () => {
@@ -26,20 +28,37 @@ const App = () => {
     getTracks()
   }, []);
 
+
+  const handleSelect = (track) => {
+    console.log('track clicked:', track)
+    setSelected(track);
+    setIsFormOpen(false);
+  }
+
+  const handleFormView = (track) => {
+    if (!track._id) setSelected(null);
+    setIsFormOpen(!isFormOpen);
+  }
+
   const handleCreate = async (trackData) => {
     try {
-      const created = await trackService.create(trackData);
+      const newTrack = await trackService.create(trackData);
       setTracks([newTrack, ...tracks])
+      setIsFormOpen(false);
 
     } catch (err) {
       console.log(err)
     }
-  }
+  };
 
   return (
     <>
     <h1>JukeBox Hero</h1>
-    <TrackList tracks={tracks} />
+    <TrackList tracks={tracks} 
+    handleSelect={handleSelect} />
+    <TrackForm />
+    <TrackDetail selected={selected} />
+    
     </>
   )
 };

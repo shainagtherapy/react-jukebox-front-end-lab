@@ -9,14 +9,19 @@ const TrackList = (props) => {
             ) : (
                 <ul>
                 {props.tracks.map((track) => (
-                    <li key={track._id}>"{track.title}" by {track.artist}</li>
+                    <li key={track._id} 
+                    style={{ cursor: 'pointer', color: "white" }}
+                    onClick={() => props.handleSelect(track)} >"{track.title}" by {track.artist}</li>
                 ))}
                 </ul>
             )}
         </div>
+        <button onClick={props.handleFormView}>
+            {props.isFormOpen ? 'Close Form' : 'Add Track'}
+        </button>
         </div>
-    )
-}
+    );
+};
 
 
 
