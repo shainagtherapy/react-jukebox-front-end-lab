@@ -1,4 +1,4 @@
-const TrackDetail = (props) => {
+const NowPlaying = (props) => {
     if (!props.selected) {
         return (
             <div>
@@ -21,4 +21,4 @@ const TrackDetail = (props) => {
     );
 };
 
-export default TrackDetail;
+export default NowPlaying;

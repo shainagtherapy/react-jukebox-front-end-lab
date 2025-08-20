@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import * as trackService from './services/trackService';
 
 import TrackList from './components/TrackList/TrackList';
-import TrackDetail from './components/TrackDetail/TrackDetail';
+import NowPlaying from './components/NowPlaying/NowPlaying';
 import TrackForm from './components/TrackForm/TrackForm';
 
 
@@ -57,9 +57,9 @@ const App = () => {
     handleSelect={handleSelect} handleFormView={handleFormView} isFormOpen={isFormOpen} />
     {isFormOpen ? (
     <TrackForm handleAddTrack={handleAddTrack} selected={selected}/> ) : (
-    <TrackDetail selected={selected} handleFormView={handleFormView} /> )}
+    <NowPlaying selected={selected} handleFormView={handleFormView} /> )}
     </>
-  )
+  );
 };
 
 export default App;

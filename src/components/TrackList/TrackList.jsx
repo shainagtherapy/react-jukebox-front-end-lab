@@ -1,7 +1,11 @@
 const TrackList = (props) => {
 
     return (
-        <div>
+        <>
+        <body> 
+        <button onClick={props.handleFormView}>
+            {props.isFormOpen ? 'Close Form' : 'Add Track'}
+        </button>
         <h2>Track List</h2>
         <div>
             {!props.tracks.length ? (
@@ -16,15 +20,10 @@ const TrackList = (props) => {
                 </ul>
             )}
         </div>
-        <button onClick={props.handleFormView}>
-            {props.isFormOpen ? 'Close Form' : 'Add Track'}
-        </button>
-        </div>
+        </body>
+        </>
     );
 };
-
-
-
 
 
 export default TrackList;
