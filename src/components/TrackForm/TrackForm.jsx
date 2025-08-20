@@ -31,7 +31,7 @@ const TrackForm = (props) => {
             
                 <label htmlFor="artist">Artist:</label>
                 <input id="artist" name="artist" value={formData.artist} onChange={handleChange} required />
-            <button type="submit"> {props.selected ? 'Update Pet' : 'Add New Pet'} </button>
+            <button type="submit"> {props.selected ? 'Update Track' : 'Add New Track'} </button>
             </form>
         </div>
     );

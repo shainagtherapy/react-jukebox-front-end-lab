@@ -2,7 +2,6 @@ const TrackList = (props) => {
 
     return (
         <>
-        <body> 
         <button onClick={props.handleFormView}>
             {props.isFormOpen ? 'Close Form' : 'Add Track'}
         </button>
@@ -20,7 +19,6 @@ const TrackList = (props) => {
                 </ul>
             )}
         </div>
-        </body>
         </>
     );
 };
