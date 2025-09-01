@@ -1,14 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const TrackForm = (props) => {
     const initialState = {
             title:'',
             artist:'', 
     };
-
     const [formData, setFormData] = useState(
         props.selected ? props.selected : initialState
     );
+    useEffect(() => {
+        setFormData(props.selected ? props.selected : initialState)
+    }, [props.selected]);
 
     const handleChange = (event) => {
         setFormData({...formData, [event.target.name]: event.target.value});

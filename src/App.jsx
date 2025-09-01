@@ -36,8 +36,23 @@ const App = () => {
   }
 
   const handleFormView = () => {
-    if (!tracks._id) setSelected(null);
+    setSelected(null);
     setIsFormOpen(!isFormOpen);
+  }
+
+  const handleOpenAddForm = () => {
+  setSelected(null);
+  setIsFormOpen(true);
+  };
+
+  const handleOpenEditForm = (track) => {
+    setSelected(track);
+    setIsFormOpen(true);
+  };
+
+  const handleEdit = (track) => {
+    setSelected(track);
+    setIsFormOpen(true);
   }
 
   const handleAddTrack = async (formData) => {
@@ -54,12 +69,12 @@ const App = () => {
     try {
       const updatedTrack = await trackService.update(formData, trackId)
       if (updatedTrack.err) {
-        throw new Error(updatedTrack.err);
+        throw new Error(updatedTrack.err)
       }
       const updatedTrackList = tracks.map((track) => (
         track._id !== updatedTrack._id ? track : updatedTrack
       ));
-      console.log(updatedTrackList)
+
       setTracks(updatedTrackList)
       setSelected(updatedTrack);
       setIsFormOpen(false);
@@ -69,23 +84,32 @@ const App = () => {
       }
     };
 
-    const handleSumbit = (event) => {
-      event.preventDefault();
-      if(props.selected) {
-        props.handleUpdateTrack(formData, props.selected._id);
-      } else {
-        props.handleAddTrack(formData);
+    const handleDeleteTrack = async (trackId) => {
+      try {
+        const deletedTrack = await trackService.deleteTrack(trackId)
+
+        if (deletedTrack?.err) {
+          throw new Error(deletedTrack.err);
+        }
+        console.log(deletedTrack)
+
+        setTracks(prev => prev.filter(track => track._id !== trackId));
+        setSelected(null);
+        setIsFormOpen(false);
+      } catch (err) {
+        console.log(err);
       }
     };
+
 
   return (
     <>
     <h1>JukeBox Hero</h1>
     <TrackList tracks={tracks} 
-    handleSelect={handleSelect} handleFormView={handleFormView} isFormOpen={isFormOpen} />
+    handleSelect={handleSelect} handleFormView={handleFormView} isFormOpen={isFormOpen} handleEdit={handleEdit}/>
     {isFormOpen ? (
     <TrackForm handleAddTrack={handleAddTrack} selected={selected} handleUpdateTrack={handleUpdateTrack}/> ) : (
-    <NowPlaying selected={selected} handleFormView={handleFormView} /> )}
+    <NowPlaying selected={selected} handleOpenEditForm={handleOpenEditForm} handleDeleteTrack={handleDeleteTrack} /> )}
     </>
   );
 };

@@ -31,7 +31,7 @@ const update = async (formData, trackId) => {
     try {
         const res = await fetch(`${BASE_URL}/${trackId}`, {
             method: 'PUT',
-            headers: {'Content-type': 'application/json', },
+            headers: {'Content-type': 'application/json' },
             body: JSON.stringify(formData)
         });
         return res.json();
@@ -49,7 +49,7 @@ const deleteTrack = async (trackId) => {
     } catch (err) {
         console.log(err);
     }
-}
+};
 
 export {
     index,
